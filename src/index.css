@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ... */
 
+.leaflet-popup-tip {
+  border-radius: 4px;
+}
 @layer base {
   :root {
 

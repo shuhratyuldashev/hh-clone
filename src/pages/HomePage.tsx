@@ -1,9 +1,10 @@
-import VacancyList from "../components/Vacancys/VacancyList"
-
+import FilterBar from "../components/Vacancies/FilterBar"
+import VacancyList from "../components/Vacancies/VacancyList"
 
 const HomePage = () => {
   return (
-    <main>
+    <main className="w-[75%] my-10 mx-auto flex">
+        <FilterBar />
         <VacancyList />
     </main>
   )
