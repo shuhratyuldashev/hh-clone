@@ -3,7 +3,7 @@ import axios from "axios";
 
 // const API_URL = process.env.HH_API_URL
 
-const getAllVacancys = async() => {
+const getAllVacancies = async() => {
     const response = await axios.get(`https://api.hh.uz/vacancies/`);
     return response.data;
 }
@@ -16,7 +16,7 @@ const getVacancyById = async(id: number) => {
 const useGetAll = () => {
     const { data, error, isLoading } = useQuery({
         queryKey: ['vacancies'], 
-        queryFn: getAllVacancys
+        queryFn: getAllVacancies
     });
 
     return { data, error, isLoading };

@@ -5,52 +5,80 @@ import { Label } from "../ui/label"
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
 
 const filters = [
-  { 
-    label: "Подработка"
-  },
   {
-    label: "Не полный день"
-  },
-  {
-    label: "от 4 часов в день"
-  },
-  {
-    label: "По вечерам"
-  },
-  {
-    label: "Разовое задание"
-  },
-  {
-    label: "По выходным"
+    label: "Фильтр",
+    list: [
+      { 
+        label: "Подработка"
+      },
+      {
+        label: "Не полный день"
+      },
+      {
+        label: "от 4 часов в день"
+      },
+      {
+        label: "По вечерам"
+      },
+      {
+        label: "Разовое задание"
+      },
+      {
+        label: "По выходным"
+      }
+    ]
+  },{
+    label: "Регион",
+    list: [
+      {
+        label: "Узбекистан"
+      },{
+        label: "Россия"
+      },{
+        label: "Казахстан"
+      }
+    ]
+  },{
+    label: "Опыт работы",
+    list: [
+      {
+        label: "Не имеет значения"
+      },{
+        label: "Нет опыта"
+      },{
+        label: "от 1 года до 3 лет"
+      },{
+        label: "от 3 года до 6 лет"
+      },{
+        label: "более 6 лет"
+      }
+    ]
   }
 ]
 
 const FilterBar = () => {
   return (
-    <div className="mr-5 w-[45%]">
-      <Card className="w-full">
+    <div>
       <CardContent>
         {/* <Form> */}
           <form className="my-4" onSubmit={() => {}}>
-            <h2>Фильтр</h2>
             <div className="mt-4 flex flex-col gap-2">
               {filters.map((f: any) => (
-                <div className="flex items-center gap-2" key={f.label}>
-                  <Checkbox />
-                  <Label>{f.label}</Label>
+                <div className="flex-col gap-2" key={f.label}>
+                  <h2>{f.label}</h2>
+                  {f.list.map((i: any) => (
+                      <div key={i.label} className="w-full flex gap-2 mt-1">
+                        <Checkbox />
+                        <Label>{i.label}</Label>
+                      </div>
+                    ))}
                 </div>
               ))}
             </div>
-            <RadioGroup>
-              <RadioGroupItem value="v1" id="r1"/>
-              <RadioGroupItem value="v3" id="r2"/>
-              <RadioGroupItem value="v2" id="r3"/>
-
-            </RadioGroup>
+    
           </form>
         {/* </Form> */}
       </CardContent>
-    </Card>
     </div>
   )
 }

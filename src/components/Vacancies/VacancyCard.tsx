@@ -2,17 +2,18 @@ import { Link } from "react-router-dom";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardFooter, CardTitle } from "../ui/card";
+import { Heart } from "lucide-react";
 
-const VacancyCard = ({ vacancy }: { vacancy: any }) => {
+const VacancyCard = ({ vacancy, isAuth }: { vacancy: any, isAuth: boolean }) => {
   const { id, name, salary, employer, employment, experience, area, premium, alternate_url } = vacancy;
 
   return (
     <Card>
       <CardContent>
         <CardTitle className="mt-5 text-2xl">{name}</CardTitle>
-        <div className="flex items-center my-2 gap-4">
+        <div className="flex lg:items-center md:flex-row my-2 gap-4 flex-col items-start">
           {salary ? (
-            <h2 className="font-semibold text-xl text-green-500">
+            <h2 className="font-semibold text-xl text-green-600">
               {salary.from  && `от ${salary.from}`|| ''} {salary.to  && `до ${salary.to}`|| ''} {salary.currency}
               </h2>
           ) : (
@@ -33,15 +34,22 @@ const VacancyCard = ({ vacancy }: { vacancy: any }) => {
       </CardContent>
       <CardFooter className="flex gap-2">
         <Link to={alternate_url}>
-          <Button className="bg-blue-500 hover:bg-blue-700">
+          <Button className="bg-blue-500 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-500 text-white">
             Откликнуться в hh 
           </Button>
         </Link>
         <Link to={`/${id}`}>
-          <Button className="hover:bg-blue-50" variant="secondary">
+          <Button className="hover:bg-blue-50 dark:hover:bg-slate-700" variant="secondary">
             Посмотреть
           </Button>
         </Link>
+        {isAuth &&
+        <Link to='/favorites'>
+          <Button size="icon" className="hover:bg-blue-50 dark:hover:bg-slate-700" variant="secondary">
+            <Heart />
+          </Button>
+        </Link>
+        }
       </CardFooter>
     </Card>
   );

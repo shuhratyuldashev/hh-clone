@@ -1,26 +1,28 @@
-import { useGetAll } from "../../hooks/useVacancys";
+import PaginationVacancies from "./Pagination";
 import VacanciesSkeleton from "./VacanciesSkeleton";
 import VacancyCard from "./VacancyCard";
 import VacancyNotFound from "./VacancyNotFound";
 
-const VacancyList = () => {
-  const { data, error, isLoading } = useGetAll();
+const VacancyList = ({ vacancies, error, isLoading, isAuth }: { vacancies: any, error: any, isLoading: any, isAuth: boolean}) => {
 
   if (isLoading) return <VacanciesSkeleton />;
   if (error) return <VacancyNotFound />;
 
-  const vacancies = data.items
 
   return (
-    <div className="flex flex-col gap-2">
+    <section className="flex flex-col gap-2">
       {vacancies.length !== 0 ?
         vacancies.map((el: any) => (
-          <VacancyCard key={el.id} vacancy={el}/>
-        ))
+            <VacancyCard isAuth={isAuth} key={el.id} vacancy={el}/>
+        )
+      )
       :(
         <h1>Two</h1>
       )}
-    </div>
+      <PaginationVacancies />
+
+
+    </section>
   );
 }
 

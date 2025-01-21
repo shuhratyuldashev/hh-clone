@@ -6,7 +6,7 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import "leaflet/dist/leaflet.css";
 import VacancyNotFound from "./VacancyNotFound"
 
-const VacancyFullInfo = ({ vacancy }: { vacancy: any }) => {
+const VacancyFullInfo = ({ vacancy, isAuth }: { vacancy: any, isAuth: boolean }) => {
   if (!vacancy) {
     return <VacancyNotFound />; 
   }
@@ -18,11 +18,11 @@ const VacancyFullInfo = ({ vacancy }: { vacancy: any }) => {
     <Card>
       <CardContent>
         <CardTitle className="mt-5 text-2xl">{name}</CardTitle>
-        <div className="flex items-center my-2 gap-4">
+        <div className="flex lg:items-center md:flex-row my-2 gap-4 flex-col items-start">
           {salary ? (
-            <h2 className="font-semibold text-xl text-green-500">
-              {salary.from && `от ${salary.from}` || ''} {salary.to && `до ${salary.to}` || ''} {salary.currency}
-            </h2>
+            <h2 className="font-semibold text-xl text-green-600">
+              {salary.from  && `от ${salary.from}`|| ''} {salary.to  && `до ${salary.to}`|| ''} {salary.currency}
+              </h2>
           ) : (
             <h2 className="font-semibold text-xl">Зарплата не указана</h2>
           )}
@@ -48,12 +48,12 @@ const VacancyFullInfo = ({ vacancy }: { vacancy: any }) => {
               Где предстоит работать: 
             </h4>
             <span className="font-normal">{address?.city || ""}, {address?.street || ""}, {address?.building || ""}</span>
-            <div className="w-full h-[400px] mt-4">
+            <div className="w-full mt-4">
               <MapContainer 
                 center={mapAddress} 
                 zoom={15} 
                 scrollWheelZoom={false} 
-                style={{ width: "100%", height: "400px", borderRadius: "16px" }}
+                className="w-full h-[200px] lg:h-[400px] md:h-[300px] rounded-lg"
               >
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -73,7 +73,7 @@ const VacancyFullInfo = ({ vacancy }: { vacancy: any }) => {
           <p className="text-gray-500 mt-4">Адрес не указан.</p>
         )}
         <Link to={alternate_url}>
-          <Button className="bg-blue-500 hover:bg-blue-700 mt-5">
+          <Button className="bg-blue-500 hover:bg-blue-700 mt-5 text-white">
             Откликнуться в hh 
           </Button>
         </Link>
